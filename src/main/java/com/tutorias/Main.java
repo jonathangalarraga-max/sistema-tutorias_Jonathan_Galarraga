@@ -17,7 +17,7 @@ public class Main {
         // Crear docente
         Docente docente = new Docente(
                 1,
-                "Carlos Gómez",
+                "Carlos Prueba",
                 "carlos@uees.edu.ec"
         );
 
