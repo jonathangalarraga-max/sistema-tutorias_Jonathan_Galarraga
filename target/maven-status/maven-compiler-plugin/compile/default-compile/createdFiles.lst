@@ -1,6 +1,7 @@
 com\tutorias\Estudiante.class
-com\tutorias\INotificador.class
 com\tutorias\Reserva.class
+com\tutorias\Main.class
 com\tutorias\Docente.class
 com\tutorias\Horario.class
+com\tutorias\INotificador.class
 com\tutorias\ServicioReservas.class
