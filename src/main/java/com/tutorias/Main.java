@@ -11,7 +11,7 @@ public class Main {
         Estudiante estudiante = new Estudiante(
                 1,
                 "Jonathan Galarraga",
-                "juan@uees.edu.ec"
+                "jona@uees.edu.ec"
         );
 
         // Crear docente
