@@ -27,7 +27,12 @@ public class ServicioReservas {
 
         int id = reservas.size() + 1;
 
-        Reserva reserva = new Reserva(id, estudiante, horario);
+        // Se mantiene el constructor original
+        Reserva reserva = new Reserva(
+                id,
+                estudiante,
+                horario
+        );
 
         horario.reservar();
 

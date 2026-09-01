@@ -1,0 +1,56 @@
+@startuml
+
+title Patrón Builder - Sistema de Reserva de Tutorías
+
+class Reserva {
+    -int id
+    -Estudiante estudiante
+    -Docente docente
+    -LocalDate fecha
+    -LocalTime hora
+    -String modalidad
+    -String observaciones
+    -int duracion
+    -String ubicacion
+    -String estado
+
+    +Reserva(Estudiante, Docente, LocalDate, LocalTime, String, String, int, String)
+    +Reserva(int, Estudiante, Horario)
+    +int getId()
+    +Estudiante getEstudiante()
+    +Docente getDocente()
+    +LocalDate getFecha()
+    +LocalTime getHora()
+    +String getModalidad()
+    +String getObservaciones()
+    +int getDuracion()
+    +String getUbicacion()
+    +String getEstado()
+    +void confirmar()
+    +void cancelar()
+}
+
+class ReservaBuilder {
+    -Estudiante estudiante
+    -Docente docente
+    -LocalDate fecha
+    -LocalTime hora
+    -String modalidad
+    -String observaciones
+    -int duracion
+    -String ubicacion
+
+    +ReservaBuilder estudiante(Estudiante)
+    +ReservaBuilder docente(Docente)
+    +ReservaBuilder fecha(LocalDate)
+    +ReservaBuilder hora(LocalTime)
+    +ReservaBuilder modalidad(String)
+    +ReservaBuilder observaciones(String)
+    +ReservaBuilder duracion(int)
+    +ReservaBuilder ubicacion(String)
+    +Reserva build()
+}
+
+ReservaBuilder ..> Reserva : construye
+
+@enduml
