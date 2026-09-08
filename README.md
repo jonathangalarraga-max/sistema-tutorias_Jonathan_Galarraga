@@ -201,6 +201,35 @@ El proyecto contiene las siguientes evidencias:
 
 https://github.com/jonathangalarraga-max/sistema-tutorias_Jonathan_Galarraga.git
 
+## Incremento 1 - Ae3
+
+### Patrones implementados
+
+- Factory Method: se mantiene para la creación de mecanismos de notificación.
+- Builder: se mantiene para la construcción configurable de Reserva.
+- Strategy: encapsula las reglas variables de cancelación.
+- Observer: permite notificar a varios componentes cuando cambia el estado de una Reserva.
+
+### SOLID
+
+Strategy favorece SRP y Open/Closed porque cada política de cancelación
+se encuentra separada y pueden agregarse nuevas estrategias sin modificar
+la lógica principal.
+
+Observer reduce el acoplamiento entre Reserva y los componentes que reaccionan
+a los cambios de estado.
+
+### Compilación
+
+mvn clean compile
+
+### Pruebas
+
+mvn clean test
+
+### UML
+
+
 ## Declaración de uso de IA
 
 Para el desarrollo del proyecto se utilizó inteligencia artificial como herramienta de apoyo para comprender conceptos relacionados con patrones de diseño, revisar errores de código, mejorar la documentación y orientar la implementación. El código final fue revisado y adaptado de acuerdo con los requerimientos del proyecto.
