@@ -2,6 +2,8 @@ package com.tutorias;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reserva {
 
@@ -15,6 +17,9 @@ public class Reserva {
     private int duracion;
     private String ubicacion;
     private String estado;
+
+    // NUEVO: lista de observadores
+    private List<IObservadorReserva> observadores = new ArrayList<>();
 
     // Constructor utilizado por Builder
     public Reserva(
@@ -88,11 +93,36 @@ public class Reserva {
         return estado;
     }
 
+    // NUEVO: agregar observador
+    public void agregarObservador(IObservadorReserva observador) {
+        if (observador != null) {
+            observadores.add(observador);
+        }
+    }
+
+    // NUEVO: quitar observador
+    public void quitarObservador(IObservadorReserva observador) {
+        observadores.remove(observador);
+    }
+
+    // NUEVO: notificar observadores
+    private void notificarObservadores() {
+        for (IObservadorReserva observador : observadores) {
+            observador.actualizar(this);
+        }
+    }
+
     public void confirmar() {
         this.estado = "Confirmada";
+
+        // Notificar cuando cambia el estado
+        notificarObservadores();
     }
 
     public void cancelar() {
         this.estado = "Cancelada";
+
+        // Notificar cuando cambia el estado
+        notificarObservadores();
     }
 }

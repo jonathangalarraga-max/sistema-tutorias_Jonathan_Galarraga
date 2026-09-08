@@ -7,21 +7,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Crear estudiante
+        // ==========================================
+        // CREAR DATOS INICIALES
+        // ==========================================
+
         Estudiante estudiante = new Estudiante(
                 1,
                 "Jonathan Galarraga",
                 "jona@uees.edu.ec"
         );
 
-        // Crear docente
         Docente docente = new Docente(
                 1,
                 "Carlos Prueba",
                 "carlos@uees.edu.ec"
         );
 
-        // Crear horario
         Horario horario = new Horario(
                 1,
                 LocalDate.of(2026, 8, 25),
@@ -29,7 +30,6 @@ public class Main {
                 LocalTime.of(11, 0)
         );
 
-        // Mostrar información inicial
         System.out.println("=== SISTEMA DE RESERVA DE TUTORÍAS ===");
         System.out.println();
 
@@ -42,14 +42,16 @@ public class Main {
         System.out.println("Horario disponible: "
                 + horario.estaDisponible());
 
-        // Crear reserva
+        // ==========================================
+        // CREAR RESERVA
+        // ==========================================
+
         Reserva reserva = new Reserva(
                 1,
                 estudiante,
                 horario
         );
 
-        // Reservar horario
         horario.reservar();
 
         System.out.println();
@@ -61,7 +63,10 @@ public class Main {
         System.out.println("Horario disponible: "
                 + horario.estaDisponible());
 
-        // Confirmar reserva
+        // ==========================================
+        // CONFIRMAR RESERVA
+        // ==========================================
+
         reserva.confirmar();
 
         System.out.println();
@@ -69,25 +74,13 @@ public class Main {
 
         System.out.println("Estado: " + reserva.getEstado());
 
-        // Cancelar reserva
-        estudiante.cancelarReserva(reserva);
-
-        System.out.println();
-        System.out.println("=== RESERVA CANCELADA ===");
-
-        System.out.println("Estado: " + reserva.getEstado());
-
-        System.out.println("Horario disponible nuevamente: "
-                + horario.estaDisponible());
-
         // ==========================================
-        // PROBAR FACTORY METHOD
+        // FACTORY METHOD
         // ==========================================
 
         System.out.println();
         System.out.println("=== PRUEBA FACTORY METHOD ===");
 
-        // Crear notificador de correo
         NotificadorCreator correo = new CorreoCreator();
 
         correo.enviarNotificacion(
@@ -95,7 +88,6 @@ public class Main {
                 "Su tutoría ha sido confirmada."
         );
 
-        // Crear notificador de WhatsApp
         NotificadorCreator whatsapp = new WhatsAppCreator();
 
         whatsapp.enviarNotificacion(
@@ -103,7 +95,6 @@ public class Main {
                 "Su tutoría ha sido confirmada."
         );
 
-        // Crear notificador SMS
         NotificadorCreator sms = new SMSCreator();
 
         sms.enviarNotificacion(
@@ -111,22 +102,20 @@ public class Main {
                 "Su tutoría ha sido confirmada."
         );
 
-                // Crear notificador Push
         NotificadorCreator push = new PushCreator();
 
         push.enviarNotificacion(
                 "Usuario Jonathan",
                 "Su tutoría ha sido confirmada mediante Push."
-);
+        );
 
         // ==========================================
-        // PROBAR BUILDER
+        // BUILDER
         // ==========================================
 
         System.out.println();
         System.out.println("=== PRUEBA BUILDER ===");
 
-        // Reserva 1
         Reserva reserva1 = new ReservaBuilder()
                 .estudiante(estudiante)
                 .docente(docente)
@@ -138,15 +127,19 @@ public class Main {
 
         System.out.println();
         System.out.println("=== RESERVA 1 ===");
-        System.out.println("Estudiante: " + reserva1.getEstudiante().getNombre());
-        System.out.println("Docente: " + reserva1.getDocente().getNombre());
+
+        System.out.println("Estudiante: "
+                + reserva1.getEstudiante().getNombre());
+
+        System.out.println("Docente: "
+                + reserva1.getDocente().getNombre());
+
         System.out.println("Fecha: " + reserva1.getFecha());
         System.out.println("Hora: " + reserva1.getHora());
         System.out.println("Modalidad: " + reserva1.getModalidad());
-        System.out.println("Observaciones: " + reserva1.getObservaciones());
+        System.out.println("Observaciones: "
+                + reserva1.getObservaciones());
 
-
-        // Reserva 2
         Reserva reserva2 = new ReservaBuilder()
                 .estudiante(estudiante)
                 .docente(docente)
@@ -160,14 +153,99 @@ public class Main {
 
         System.out.println();
         System.out.println("=== RESERVA 2 ===");
-        System.out.println("Estudiante: " + reserva2.getEstudiante().getNombre());
-        System.out.println("Docente: " + reserva2.getDocente().getNombre());
+
+        System.out.println("Estudiante: "
+                + reserva2.getEstudiante().getNombre());
+
+        System.out.println("Docente: "
+                + reserva2.getDocente().getNombre());
+
         System.out.println("Fecha: " + reserva2.getFecha());
         System.out.println("Hora: " + reserva2.getHora());
         System.out.println("Modalidad: " + reserva2.getModalidad());
-        System.out.println("Observaciones: " + reserva2.getObservaciones());
-        System.out.println("Duración: " + reserva2.getDuracion() + " minutos");
-        System.out.println("Ubicación: " + reserva2.getUbicacion());
 
-        }
-        }
+        System.out.println("Observaciones: "
+                + reserva2.getObservaciones());
+
+        System.out.println("Duración: "
+                + reserva2.getDuracion() + " minutos");
+
+        System.out.println("Ubicación: "
+                + reserva2.getUbicacion());
+
+        // ==========================================
+        // AE3 - STRATEGY
+        // ==========================================
+
+        System.out.println();
+        System.out.println("=== AE3 - STRATEGY ===");
+
+        // Crear notificador para ServicioReservas
+        INotificador notificador = new Notificador();
+
+        ServicioReservas servicio = new ServicioReservas(notificador);
+
+        // Utilizar estrategia normal
+        servicio.setEstrategiaCancelacion(
+                new CancelacionNormal()
+        );
+
+        System.out.println(
+                "Cancelación normal: "
+                + servicio.cancelarReserva(reserva)
+        );
+
+        System.out.println(
+                "Estado de la reserva: "
+                + reserva.getEstado()
+        );
+
+        // ==========================================
+        // AE3 - OBSERVER
+        // ==========================================
+
+        System.out.println();
+        System.out.println("=== AE3 - OBSERVER ===");
+
+        Reserva reservaObserver = new ReservaBuilder()
+                .estudiante(estudiante)
+                .docente(docente)
+                .fecha(LocalDate.of(2026, 8, 27))
+                .hora(LocalTime.of(15, 0))
+                .modalidad("Virtual")
+                .observaciones("Prueba Observer")
+                .build();
+
+        // Crear observadores
+        IObservadorReserva correoObserver =
+                new NotificadorCorreoObserver();
+
+        IObservadorReserva panelObserver =
+                new PanelReservaObserver();
+
+        // Registrar observadores
+        reservaObserver.agregarObservador(
+                correoObserver
+        );
+
+        reservaObserver.agregarObservador(
+                panelObserver
+        );
+
+        System.out.println(
+                "Estado inicial: "
+                + reservaObserver.getEstado()
+        );
+
+        // Cambiar estado y activar Observer
+        reservaObserver.cancelar();
+
+        System.out.println(
+                "Estado final: "
+                + reservaObserver.getEstado()
+        );
+
+        System.out.println();
+        System.out.println("=== FIN DE LA EJECUCIÓN ===");
+    }
+}

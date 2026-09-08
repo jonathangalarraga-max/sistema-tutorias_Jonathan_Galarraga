@@ -8,9 +8,13 @@ public class ServicioReservas {
     private List<Reserva> reservas;
     private INotificador notificador;
 
+    // NUEVO: estrategia de cancelación
+    private ICancelacionStrategy estrategiaCancelacion;
+
     public ServicioReservas(INotificador notificador) {
         this.reservas = new ArrayList<>();
         this.notificador = notificador;
+        this.estrategiaCancelacion = new CancelacionNormal();
     }
 
     public boolean verificarDisponibilidad(Horario horario) {
@@ -27,7 +31,6 @@ public class ServicioReservas {
 
         int id = reservas.size() + 1;
 
-        // Se mantiene el constructor original
         Reserva reserva = new Reserva(
                 id,
                 estudiante,
@@ -48,7 +51,27 @@ public class ServicioReservas {
         return reserva;
     }
 
-    public void cancelarReserva(Reserva reserva) {
+    // NUEVO: permite cambiar la estrategia
+    public void setEstrategiaCancelacion(
+            ICancelacionStrategy estrategiaCancelacion) {
+
+        this.estrategiaCancelacion = estrategiaCancelacion;
+    }
+
+    // MODIFICADO: ahora utiliza Strategy
+    public boolean cancelarReserva(Reserva reserva) {
+
+        if (reserva == null) {
+            return false;
+        }
+
+        if (estrategiaCancelacion == null) {
+            estrategiaCancelacion = new CancelacionNormal();
+        }
+
+        if (!estrategiaCancelacion.puedeCancelar(reserva)) {
+            return false;
+        }
 
         reserva.cancelar();
 
@@ -56,6 +79,8 @@ public class ServicioReservas {
                 reserva.getEstudiante().getCorreo(),
                 "Su reserva de tutoría ha sido cancelada."
         );
+
+        return true;
     }
 
     public List<Reserva> getReservas() {
