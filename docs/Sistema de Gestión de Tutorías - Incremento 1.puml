@@ -1,0 +1,99 @@
+@startuml
+Sistema de Gestión de Tutorías - Incremento 1
+
+class Estudiante {
+  - int id
+  - String nombre
+  - String correo
+}
+
+class Docente {
+  - int id
+  - String nombre
+  - String correo
+}
+
+class Horario {
+  - int id
+  - LocalDate fecha
+  - LocalTime horaInicio
+  - LocalTime horaFin
+  - boolean disponible
+  + estaDisponible()
+  + reservar()
+  + liberar()
+}
+
+class Reserva {
+  - int id
+  - LocalDateTime fechaCreacion
+  - String estado
+  - List<IObservadorReserva> observadores
+  + confirmar()
+  + cancelar()
+  + reprogramar()
+  + agregarObservador(IObservadorReserva)
+  + quitarObservador(IObservadorReserva)
+  - notificarObservadores()
+}
+
+interface IObservadorReserva {
+  + actualizar(Reserva reserva)
+}
+
+class NotificadorCorreoObserver
+class PanelReservaObserver
+
+interface ICancelacionStrategy {
+  + puedeCancelar(Reserva reserva)
+}
+
+class CancelacionNormal
+class CancelacionPrioritaria
+class CancelacionGrupal
+
+class ServicioReservas {
+  - ICancelacionStrategy estrategiaCancelacion
+  + setEstrategiaCancelacion(ICancelacionStrategy)
+  + cancelarReserva(Reserva)
+}
+
+interface INotificador {
+  + enviarNotificacion(String destinatario, String mensaje)
+}
+
+abstract class NotificadorCreator
+class CorreoCreator
+class WhatsAppCreator
+class SMSCreator
+class PushCreator
+class NotificadorCorreo
+class NotificadorWhatsApp
+class NotificadorSMS
+class NotificadorPush
+class ReservaBuilder
+
+CancelacionNormal ..|> ICancelacionStrategy
+CancelacionPrioritaria ..|> ICancelacionStrategy
+CancelacionGrupal ..|> ICancelacionStrategy
+
+NotificadorCorreoObserver ..|> IObservadorReserva
+PanelReservaObserver ..|> IObservadorReserva
+Reserva "1" o-- "*" IObservadorReserva
+ServicioReservas --> ICancelacionStrategy
+
+NotificadorCorreo ..|> INotificador
+NotificadorWhatsApp ..|> INotificador
+NotificadorSMS ..|> INotificador
+NotificadorPush ..|> INotificador
+
+CorreoCreator --|> NotificadorCreator
+WhatsAppCreator --|> NotificadorCreator
+SMSCreator --|> NotificadorCreator
+PushCreator --|> NotificadorCreator
+
+ReservaBuilder ..> Reserva : construye
+Estudiante "1" -- "*" Reserva
+Docente "1" -- "*" Horario
+Horario "1" -- "*" Reserva
+@enduml
