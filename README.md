@@ -233,3 +233,27 @@ mvn clean test
 ## Declaración de uso de IA
 
 Para el desarrollo del proyecto se utilizó inteligencia artificial como herramienta de apoyo para comprender conceptos relacionados con patrones de diseño, revisar errores de código, mejorar la documentación y orientar la implementación. El código final fue revisado y adaptado de acuerdo con los requerimientos del proyecto.
+
+## Ae4 - Kata de refactorización: Antes y después
+
+Para la actividad Ae4 se realizaron tres refactorizaciones incrementales, manteniendo el comportamiento observable del sistema:
+
+1. **Constantes de estado:** se reemplazaron literales repetidos por constantes en `Reserva` y se reutilizó `ESTADO_CANCELADA` en las estrategias.
+2. **Extract Method:** se extrajo la validación de campos obligatorios de `ReservaBuilder.build()` hacia `validarCamposObligatorios()`.
+3. **Simplificación de Main:** se dividió el método `main()` en métodos privados con responsabilidades específicas para facilitar su lectura y mantenimiento.
+
+Después de cada refactorización se compiló y ejecutó el proyecto mediante `javac`/`java` en el entorno de trabajo, verificando que la salida observable se mantuviera. En un entorno con Maven se puede ejecutar:
+
+```bash
+mvn clean compile
+mvn clean test
+mvn exec:java "-Dexec.mainClass=com.tutorias.Main"
+```
+
+### Historial Ae4
+
+- `324fd25 refactor: reemplazar estados literales por constantes`
+- `9d7b134 refactor: extraer validacion del builder`
+- `5b04677 refactor: simplificar metodo principal`
+
+El informe de la actividad contiene la matriz de Code Smells, comparación antes/después, evidencias de ejecución y conclusiones.
