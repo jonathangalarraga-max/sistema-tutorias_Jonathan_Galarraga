@@ -7,6 +7,10 @@ import java.util.List;
 
 public class Reserva {
 
+    public static final String ESTADO_PENDIENTE = "Pendiente";
+    public static final String ESTADO_CONFIRMADA = "Confirmada";
+    public static final String ESTADO_CANCELADA = "Cancelada";
+
     private int id;
     private Estudiante estudiante;
     private Docente docente;
@@ -41,7 +45,7 @@ public class Reserva {
         this.observaciones = observaciones;
         this.duracion = duracion;
         this.ubicacion = ubicacion;
-        this.estado = "Pendiente";
+        this.estado = ESTADO_PENDIENTE;
     }
 
     // Constructor original
@@ -50,7 +54,7 @@ public class Reserva {
         this.id = id;
         this.estudiante = estudiante;
         this.fecha = horario.getFecha();
-        this.estado = "Pendiente";
+        this.estado = ESTADO_PENDIENTE;
     }
 
     public int getId() {
@@ -113,14 +117,14 @@ public class Reserva {
     }
 
     public void confirmar() {
-        this.estado = "Confirmada";
+        this.estado = ESTADO_CONFIRMADA;
 
         // Notificar cuando cambia el estado
         notificarObservadores();
     }
 
     public void cancelar() {
-        this.estado = "Cancelada";
+        this.estado = ESTADO_CANCELADA;
 
         // Notificar cuando cambia el estado
         notificarObservadores();
