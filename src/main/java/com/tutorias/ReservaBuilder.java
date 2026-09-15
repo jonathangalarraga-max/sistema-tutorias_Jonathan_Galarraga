@@ -54,9 +54,7 @@ public class ReservaBuilder {
         return this;
     }
 
-    public Reserva build() {
-
-        // Validar campos obligatorios
+    private void validarCamposObligatorios() {
         if (estudiante == null) {
             throw new IllegalArgumentException(
                     "El estudiante es obligatorio."
@@ -80,6 +78,10 @@ public class ReservaBuilder {
                     "La hora es obligatoria."
             );
         }
+    }
+
+    public Reserva build() {
+        validarCamposObligatorios();
 
         return new Reserva(
                 estudiante,
