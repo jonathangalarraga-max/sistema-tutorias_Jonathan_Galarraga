@@ -252,8 +252,9 @@ mvn exec:java "-Dexec.mainClass=com.tutorias.Main"
 
 ### Historial Ae4
 
-- `324fd25 refactor: reemplazar estados literales por constantes`
-- `9d7b134 refactor: extraer validacion del builder`
-- `5b04677 refactor: simplificar metodo principal`
+- `338796c refactor: reemplazar estados literales por constantes`
+- `37ab6cb refactor: extraer validacion del builder`
+- `b53b87c refactor: simplificar metodo principal`
+- `75097a5 docs: documentar resultado de Ae4`
 
 El informe de la actividad contiene la matriz de Code Smells, comparación antes/después, evidencias de ejecución y conclusiones.

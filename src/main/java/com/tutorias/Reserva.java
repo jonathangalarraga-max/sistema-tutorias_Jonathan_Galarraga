@@ -2,8 +2,6 @@ package com.tutorias;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Reserva {
 
@@ -22,8 +20,9 @@ public class Reserva {
     private String ubicacion;
     private String estado;
 
-    // NUEVO: lista de observadores
-    private List<IObservadorReserva> observadores = new ArrayList<>();
+    // Gestor encargado de administrar los observadores
+    private final GestorObservadoresReserva gestorObservadores =
+            new GestorObservadoresReserva();
 
     // Constructor utilizado por Builder
     public Reserva(
@@ -97,23 +96,19 @@ public class Reserva {
         return estado;
     }
 
-    // NUEVO: agregar observador
+    // Agregar observador
     public void agregarObservador(IObservadorReserva observador) {
-        if (observador != null) {
-            observadores.add(observador);
-        }
+        gestorObservadores.agregar(observador);
     }
 
-    // NUEVO: quitar observador
+    // Quitar observador
     public void quitarObservador(IObservadorReserva observador) {
-        observadores.remove(observador);
+        gestorObservadores.quitar(observador);
     }
 
-    // NUEVO: notificar observadores
+    // Notificar observadores
     private void notificarObservadores() {
-        for (IObservadorReserva observador : observadores) {
-            observador.actualizar(this);
-        }
+        gestorObservadores.notificar(this);
     }
 
     public void confirmar() {
