@@ -44,7 +44,7 @@ public class ServicioReservas {
         reservas.add(reserva);
 
         notificador.enviarNotificacion(
-                estudiante.getCorreo(),
+                estudiante.getCorreo().valor(),
                 "Su reserva de tutoría ha sido confirmada."
         );
 
@@ -76,7 +76,7 @@ public class ServicioReservas {
         reserva.cancelar();
 
         notificador.enviarNotificacion(
-                reserva.getEstudiante().getCorreo(),
+                reserva.getEstudiante().getCorreo().valor(),
                 "Su reserva de tutoría ha sido cancelada."
         );
 

@@ -6,9 +6,9 @@ public class Estudiante {
 
     private int id;
     private String nombre;
-    private String correo;
+    private Correo correo;
 
-    public Estudiante(int id, String nombre, String correo) {
+    public Estudiante(int id, String nombre, Correo correo) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
@@ -34,7 +34,7 @@ public class Estudiante {
         return nombre;
     }
 
-    public String getCorreo() {
+    public Correo getCorreo() {
         return correo;
     }
 }
